@@ -27,13 +27,14 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-repo/flask-cloud-run .
-          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-repo/flask-cloud-run
+          docker build -t us-central1-docker.pkg.dev/${{ secrets.cicd_assign }}/cloud-run-repo/cloud-run-cicd .
+          docker push us-central1-docker.pkg.dev/${{ secrets.cicd_assign }}/cloud-run-repo/cloud-run-cicd
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy flask-cloud-run \
-            --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-repo/flask-cloud-run \
+          gcloud run deploy cloud-run-cicd \
+            --image us-central1-docker.pkg.dev/${{ secrets.cicd_assign }}/cloud-run-repo/cloud-run-cicd \
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated
+
